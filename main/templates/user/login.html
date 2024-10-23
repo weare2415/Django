@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+    {% load static %}
+    <!-- 부트스트랩 및 커스텀 CSS 추가 -->
+    {% load django_bootstrap5 %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS 파일 로드 -->
+    <link rel="stylesheet" href="{% static 'css/loginpage.css' %}">
+
+    <title>로그인</title>
+    
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+
+        signUpButton.addEventListener('click', () => {
+	        container.classList.add("right-panel-active");
+        });
+
+        signInButton.addEventListener('click', () => {
+	        container.classList.remove("right-panel-active");
+        });
+
+        function closeErrorMessage() {
+            var errorMessageDiv = document.getElementById('error-message');
+            errorMessageDiv.style.display = 'none';  // 오류 메시지를 숨김
+        }
+
+        function redirectToJoinPage() {
+            window.location.href = "http://127.0.0.1:8000/users/join/";
+        }
+    </script>
+</head>
+<body>
+
+    <!-- 오류 메시지를 페이지 상단에 표시 -->
+    {% if error_msg %}
+        <div id="error-message" class="error-message">
+            {{ error_msg }}
+            <br>
+            <button class="close-btn" onclick="closeErrorMessage()">확인</button>
+        </div>
+    {% endif %}
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+			
+			<!-- <h2><a href="{% url 'users:LoginUrl' %}">로그인</a></h2> -->
+            <form action="#" method="post">
+                <h1>Create Account</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email for registration</span>
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <button>Sign Up</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-in-container">
+            <!-- 로그인 폼 -->
+            <form action="{% url 'users:LoginUrl' %}" method="post">
+                {% csrf_token %}
+				<h6><a href="{% url 'index' %}" class="main-page-link">메인</a></h6>
+                <h5>로그인</h5>
+                <div><input name="username" type="text" placeholder="아이디"></div>
+                <div class="inputbox"><input name="password" type="password" placeholder="비밀번호"></div>
+                <div><button type="submit" name="account" value="login" class="btn btn-primary">로그인</button></div>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn">로그인</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>환영합니다!</h1>
+                    <p>회원가입을 하고 <br/>당신의 여정을 시작하세요</p>
+                    <button id="signUp" onclick="redirectToJoinPage()">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 커스텀 JS 추가 -->
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/loginpage.js' %}"></script>
+
+</body>
+</html>

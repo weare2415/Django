@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAP</title>
+    <link rel="stylesheet" href="../../../static/css/map.css">
+</head>
+<body>
+    <h2><a href="{% url 'index' %}">Traveler</a></h2>
+
+    <h1>경로 시각화</h1>
+
+    {% if user.is_authenticated %}
+
+        {% if error_msg %}
+
+        <div>
+            {{ error_msg }}
+        </div>
+
+        {% else %}
+
+            {% if context %}
+                {{ context.map | safe }}
+            {% else %}
+                <p>로드된 경로가 없습니다.</p>
+            {% endif %}
+
+        {% endif %}
+
+    {% else %}
+        <h1>로그인 먼저 진행하세요.</h1>
+    {% endif %}
+</body>
+</html>

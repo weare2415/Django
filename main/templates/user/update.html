@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <!-- 부트스트랩 및 커스텀 CSS 추가 -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 정보 수정</title>
+</head>
+<body>
+    <h6><a href="{% url 'index' %}" class="main-pages">메인</a></h6>
+    <div class="container">
+     
+
+        <h1>회원 정보 수정 페이지</h1>
+        <br>
+        <div>회원 정보 수정</div>
+        <br>  
+
+        {% if user.is_authenticated %}
+            <div>{{ user.username }} 님으로 로그인 중</div>
+            <form action="{% url 'users:UpdateUrl' %}" method="post">
+                {% csrf_token %}
+                {% if error_msg %}
+                    <div class="error">{{ error_msg }}</div>
+                {% endif %}
+                
+                <div class="form-group">
+                    기존 아이디 : <input name="username" type="text" class="form-control" value="{{ user.username }}" disabled>
+                </div>
+                
+                <div class="form-group">
+                    새로운 아이디 : <input name="new_username" type="text" class="form-control" placeholder="새로운 아이디를 입력하세요">
+                </div>
+                
+                <div class="form-group">
+                    기존 비밀번호 : <input name="password" type="password" class="form-control" placeholder="기존 비밀번호를 입력하세요">
+                </div>
+                
+                <div class="form-group">
+                    새로운 비밀번호 : <input name="new_password" type="password" class="form-control" placeholder="새로운 비밀번호를 입력하세요">
+                </div>
+                
+                <div class="form-group">
+                    비밀번호 확인 : <input name="new_password_confirm" type="password" class="form-control" placeholder="비밀번호를 다시 입력하세요">
+                </div>
+                
+                <button type="submit" name="account" value="update" class="btn btn-primary btn-block">정보 수정</button>
+            </form>
+
+        
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+
+.main-pages {
+    color: #FF4B2B;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 2000;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+h1 {
+    text-align: center;
+    color: #4A90E2;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+input[type="text"], input[type="password"] {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        margin: 30px auto;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+

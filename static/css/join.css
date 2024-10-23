@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+/* 공통 스타일 초기화 및 전역 스타일 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f6f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    width  : 100vw;
+}
+
+/* 텍스트 관련 스타일 */
+h1, h2, p, a {
+    font-weight: bold;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+h2 {
+    margin: 20px 0;
+    color: #FF4B2B;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 1.25;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+    color: #333;
+}
+
+a {
+    color: #FF4B2B;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
+button {
+    border-radius: 20px;
+    border: none;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 15px 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 80ms ease-in;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+/* 폼 스타일 */
+form {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 50px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    width: 100%;
+    max-width: 800px; /* 최대 너비를 800px로 설정 (더 넓게 변경 가능) */
+}
+
+/* 입력 필드 스타일 */
+input {
+    background-color: #eee;
+    border: none;
+    padding: 15px 20px;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* 컨테이너 및 링크 컨테이너 스타일 */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* 컨테이너의 너비를 100%로 설정 */
+    max-width: none; /* 최대 너비 제한을 없앰 */
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.link_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: -430px;
+/*     margin-left: 300px;
+ */    font-size: 14px;
+    position: absolute;
+    padding: 10px;
+    
+}
+
+/* 에러 메시지 스타일 */
+.error_msg {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.link-button {
+    background: none; /* 배경색 없음 */
+    border: 1; /* 테두리 없음 */
+    color: #FF4B2B; /* 링크 색상과 유사한 색상 */
+/*     text-decoration: underline; /* 밑줄 표시 */ 
+    font-size: 14px; /* 글자 크기 조정 */
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer; /* 커서가 포인터로 변경 */
+    padding: 0; /* 기본 패딩 제거 */
+    margin: 0 10px; /* 버튼 간격 조정 */
+}
+
+.link-button:hover {
+    color: #d1401a; /* 호버 시 색상 변경 */
+    text-decoration: none; /* 호버 시 밑줄 제거 */
+}
+
+.link-button:focus {
+    outline: none; /* 포커스 시 외곽선 제거 */
+}
+
+/* 전체 폼 스타일 */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+form {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 50px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
+/* 입력 필드 스타일 */
+input {
+    background-color: #eee;
+    border: none;
+    padding: 15px 20px;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* 회원가입 버튼 스타일 */
+.signup-button {
+    border-radius: 20px;
+    border: none;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 15px 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 80ms ease-in;
+   margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.signup-button:active {
+    transform: scale(0.95);
+}
+
+/* 로그인, 메인 링크 스타일 */
+.link_style {
+    color: #FF4B2B;
+/*     text-decoration: underline; */
+    font-size: 14px;
+    margin: 0 10px; /* 가로로 간격 조정 */
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.link_style:hover {
+    color: #d1401a; /* 호버 시 색상 변경 */
+    text-decoration: none; /* 호버 시 밑줄 제거 */
+}
+
+/* 링크 컨테이너 스타일 (가로 정렬) */
+/* .link_container {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+
+.wrapper {
+    display: flex;
+    justify-content: center; 
+   flex-direction : column;
+   height: 400px;
+   width  :650px;
+}

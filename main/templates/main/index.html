@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <!-- 부트스트랩 및 커스텀 CSS 추가 -->
+    {% load django_bootstrap5 %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS 파일 로드 -->
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    <title>Travel_Webapp</title>
+    <meta property="og:title" content="Travel_Webapp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <!-- 스타일 시트들 유지 -->
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}
+      body {  margin: 0;}
+      * {  box-sizing: border-box;  border-width: 0;  border-style: solid;}
+      p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}
+      button {  background-color: transparent;}
+      button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}
+      button,select {  text-transform: none;}
+      button,[type="button"],[type="reset"],[type="submit"] {  
+        -webkit-appearance: button;  /* Webkit 브라우저용 */
+        -moz-appearance: button;     /* Mozilla 브라우저용 */
+        appearance: button;          /* 표준 속성 */
+      }
+      button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}
+      button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}
+      a {  color: inherit;  text-decoration: inherit;}
+      input {  padding: 2px 4px;}
+      img {  display: block;}
+      html { scroll-behavior: smooth; }
+    </style>
+
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-theme-neutral-dark);
+        background: var(--dl-color-theme-neutral-light);
+        fill: var(--dl-color-theme-neutral-dark);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+    />
+    <style>
+      [data-thq="thq-dropdown"]:hover > [data-thq="thq-dropdown-list"] {
+          display: flex;
+        }
+        [data-thq="thq-dropdown"]:hover > div [data-thq="thq-dropdown-arrow"] {
+          transform: rotate(90deg);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <div>
+      <link href="{% static 'css/index.css' %}" rel="stylesheet"/>
+
+      <!-- 사용자 인증 상태에 따른 버튼 표시 -->
+      <header class="upper-nav-container">
+        <div class="upper-nav-navbar">
+   
+          <!-- 중앙 정렬될 메뉴 -->
+          
+          <nav class="upper-nav-links">
+            <div class="upper-nav-logo-container">
+                <!--<img alt="logo" src="{% static 'img/logo200h.png' %}" class="upper-nav-logo" /></a>-->
+        
+                <h2 id="h2_t">
+                  <a href="{% url 'index' %}">
+                      <img src="../../../static/img/logo_img-200w.png" alt="logo" style="width: 40px; height: 40px;">
+                      Traveler
+                  </a>
+              </h2>
+            </div>
+            <div class="upper-nav-menu">
+
+            </div>
+          </nav>
+      
+          <!-- 오른쪽에 배치될 로그인 및 회원가입 -->
+          <div class="upper-nav-user-actions">
+            {% if user.is_authenticated %}
+              {% csrf_token %}
+              <span>{{ user.username }}님 환영합니다!</span>
+              <a href="{% url 'users:LogoutUrl' %}" class="upper-nav-button">로그아웃</a>
+              <a href="{% url 'users:MyPageUrl' %}" class="upper-nav-button">마이페이지</a>
+            {% else %}
+              {% csrf_token %}
+              <a href="{% url 'users:LoginUrl' %}" class="upper-nav-button">로그인</a>
+              <a href="{% url 'users:JoinUrl' %}" class="upper-nav-button">회원가입</a>
+            {% endif %}
+          </div>
+        </div>
+
+          <!-- 모바일 네비게이션 버튼 -->
+          <div data-thq="thq-burger-menu" class="upper-nav-burger-menu">
+            <svg viewBox="0 0 1024 1024" class="upper-nav-icon5">
+              <path
+                d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+              ></path>
+            </svg>
+          </div>
+        </header>
+      </header>
+      <!-- 나머지 기존 구조 유지 -->
+              <div data-thq="thq-mobile-menu" class="upper-nav-mobile-menu">
+                <div class="upper-nav-nav">
+                  <div class="upper-nav-top">
+                    <img
+                      alt="로고 이미지"
+                      src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
+                      class="upper-nav-logo"
+                    />
+                    <div data-thq="thq-close-menu" class="upper-nav-close-menu">
+                      <svg viewBox="0 0 1024 1024" class="upper-nav-icon7">
+                        <path
+                          d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <nav class="upper-nav-links2">
+                    <span class="thq-link thq-body-small">
+                      <span>호텔</span>
+                    </span>
+                    <span class="thq-link thq-body-small">
+                      <span>회원가입</span>
+                    </span>
+                    <span class="thq-link thq-body-small">
+                      <span>국내 여행지</span>
+                    </span>
+                    <span class="thq-link thq-body-small">
+                      <span>여행지 추천</span>
+                    </span>
+                    <span class="thq-link thq-body-small">
+                      <span>AI기능(미정)</span>
+                    </span>
+                  </nav>
+                </div>
+                <div class="upper-nav-buttons2">
+                  <button type="button">
+                    <a href="{% url 'users:LoginUrl' %}" class="thq-button-filled">
+                      <button type="button">Login</button>
+                  </a>
+                    <a href="{% url 'users:JoinUrl' %}" class="thq-button-filled">
+                      <button type="button">Join</button>
+                  </a>
+                </div>
+              </div>
+            </header>
+          </header>
+        </upper-nav-wrapper>
+        <travel-recommand-nav-wrapper class="travel-recommand-nav-wrapper">
+          <!--TravelRecommandNav component-->
+          <div class="travel-recommand-nav-header30 thq-section-padding">
+            <div class="travel-recommand-nav-container"></div>
+            <div class="travel-recommand-nav-max-width thq-section-max-width">
+              <div class="travel-recommand-nav-content">
+                <h1 class="travel-recommand-nav-text1 thq-heading-1">
+                  <span>당신을 위한 완벽한 여행을 계획하세요</span>
+                </h1>
+                <p class="travel-recommand-nav-text2 thq-body-large">
+                  <span>국내 여행지를 탐험하고 새로운 경험을 만나보세요</span>
+                </p>
+                <div class="travel-recommand-nav-actions">
+                  <a href="{% url 'users:SearchUrl' %}" class="thq-button-filled travel-recommand-nav-button1">
+                    <span class="travel-recommand-nav-text3 thq-body-small">
+                      인기 여행지 둘러보기
+                    </span>
+                  </a>
+                  
+                  <a href="{% url 'LocationUrl' %}" class="thq-button-outline travel-recommand-nav-button2">
+                    <span class="travel-recommand-nav-text4 thq-body-small">
+                        <span>당신의 위치를 찾아보세요</span>
+                    </span>
+                </a>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </travel-recommand-nav-wrapper>
+        <!--<div class="home-search-bar">
+          <img
+            alt="image"
+            src="/static/img/location.svg"
+            class="home-image"
+          />
+          <input
+            type="text"
+            placeholder="목적지"
+            class="home-textinput1 input"
+          />
+          <input type="date" placeholder="Date" class="home-textinput2 input" />
+          <input type="date" placeholder="Date" class="home-textinput3 input" />
+          <input
+            type="number"
+            placeholder="인원수(유아포함)"
+            class="home-textinput4 input"
+          />
+          <div class="home-search">
+            <a href="recommand-page.html" class="home-navlink">
+              <img
+                alt="image"
+                src="/static/img/search.svg"
+                class="home-icon"
+              />
+            </a>
+          </div>
+        </div>-->
+        <gallery-wrapper
+          class="gallery-wrapper"
+          rootclassname="galleryundefined"
+        >
+          <!--Gallery component-->
+          <div
+            class="gallery-gallery3 thq-section-padding galleryroot-class-name"
+          >
+            <div class="gallery-max-width thq-section-max-width">
+              <h2 class="gallery-text thq-heading-2">
+                <span>지금 떠오르는 여행지</span>
+              </h2>
+              <a href="destination-page.html" class="gallery-navlink">
+                <div class="gallery-container thq-grid-4">
+                  <div
+                    data-thq="slider"
+                    data-loop="true"
+                    data-autoplay="true"
+                    data-navigation="true"
+                    data-pagination="true"
+                    data-disable-autoplay-on-interaction="true"
+                    class="gallery-slider1 swiper"
+                  >
+                    <div data-thq="slider-wrapper" class="swiper-wrapper">
+                      <div
+                        data-thq="slider-slide"
+                        class="gallery-slider-slide1 swiper-slide"
+                      ></div>
+                      <div
+                        data-thq="slider-slide"
+                        class="gallery-slider-slide2 swiper-slide"
+                      ></div>
+                      <div
+                        data-thq="slider-slide"
+                        class="gallery-slider-slide3 swiper-slide"
+                      ></div>
+                    </div>
+                    <div
+                      data-thq="slider-pagination"
+                      class="gallery-slider-pagination1 swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"
+                    >
+                      <div
+                        data-thq="slider-pagination-bullet"
+                        class="swiper-pagination-bullet swiper-pagination-bullet-active"
+                      ></div>
+                      <div
+                        data-thq="slider-pagination-bullet"
+                        class="swiper-pagination-bullet"
+                      ></div>
+                      <div
+                        data-thq="slider-pagination-bullet"
+                        class="swiper-pagination-bullet"
+                      ></div>
+                    </div>
+                    <div
+                      data-thq="slider-button-prev"
+                      class="swiper-button-prev"
+                    ></div>
+                    <div
+                      data-thq="slider-button-next"
+                      class="swiper-button-next"
+                    ></div>
+                  </div>
+                  <div
+                    data-thq="slider"
+                    data-loop="true"
+                    data-autoplay="true"
+                    data-navigation="true"
+                    data-pagination="true"
+                    data-disable-autoplay-on-interaction="true"
+                    class="gallery-slider2 swiper"
+                  >
+                    <div data-thq="slider-wrapper" class="swiper-wrapper">
+                      <div
+                        data-thq="slider-slide"
+                        class="gallery-slider-slide4 swiper-slide"
+                      ></div>
+                      <div
+                        data-thq="slider-slide"
+                        class="gallery-slider-slide5 swiper-slide"
+                      ></div>
+                      <div
+                        data-thq="slider-slide"
+                        class="gallery-slider-slide6 swiper-slide"
+                      ></div>
+                    </div>
+                    <div
+                      data-thq="slider-pagination"
+                      class="gallery-slider-pagination2 swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"
+                    >
+                      <div
+                        data-thq="slider-pagination-bullet"
+                        class="swiper-pagination-bullet swiper-pagination-bullet-active"
+                      ></div>
+                      <div
+                        data-thq="slider-pagination-bullet"
+                        class="swiper-pagination-bullet"
+                      ></div>
+                      <div
+                        data-thq="slider-pagination-bullet"
+                        class="swiper-pagination-bullet"
+                      ></div>
+                    </div>
+                    <div
+                      data-thq="slider-button-prev"
+                      class="swiper-button-prev"
+                    ></div>
+                    <div
+                      data-thq="slider-button-next"
+                      class="swiper-button-next"
+                    ></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </gallery-wrapper>
+        <main-features-wrapper class="main-features-wrapper">
+          <!--MainFeatures component-->
+          <div class="main-features-layout251 thq-section-padding">
+            <navbar4-wrapper
+              class="navbar4-wrapper"
+              rootclassname="navbar4undefined"
+            >
+              <!--Navbar4 component-->
+              <header class="navbar4-container navbar4root-class-name">
+                <header
+                  data-thq="thq-navbar"
+                  class="navbar4-navbar-interactive"
+                >
+                  <div data-thq="thq-navbar-nav" class="navbar4-desktop-menu">
+                    <nav class="navbar4-links1">
+                      <a href="/" class="navbar4-link11">
+                        <fragment class="main-features-fragment1">
+                          <span
+                            class="main-features-text1 thq-link thq-body-small"
+                          >
+                            서울
+                          </span>
+                        </fragment>
+                      </a>
+                      <a href="/" class="navbar4-link21">
+                        <fragment class="main-features-fragment2">
+                          <span
+                            class="main-features-text2 thq-link thq-body-small"
+                          >
+                            전북/전남
+                          </span>
+                        </fragment>
+                      </a>
+                      <a href="/" class="navbar4-link31">
+                        <fragment class="main-features-fragment3">
+                          <span
+                            class="main-features-text3 thq-link thq-body-small"
+                          >
+                            울산
+                          </span>
+                        </fragment>
+                      </a>
+                      <a href="/" class="navbar4-link41">
+                        <fragment class="main-features-fragment4">
+                          <span
+                            class="main-features-text4 thq-link thq-body-small"
+                          >
+                            대구
+                          </span>
+                        </fragment>
+                      </a>
+                      <a href="/" class="navbar4-link51">
+                        <fragment class="main-features-fragment5">
+                          <span
+                            class="main-features-text5 thq-link thq-body-small"
+                          >
+                            제주
+                          </span>
+                        </fragment>
+                      </a>
+                    </nav>
+                  </div>
+                  <div data-thq="thq-burger-menu" class="navbar4-burger-menu">
+                    <svg viewBox="0 0 1024 1024" class="navbar4-icon1">
+                      <path
+                        d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div data-thq="thq-mobile-menu" class="navbar4-mobile-menu">
+                    <div class="navbar4-nav">
+                      <div class="navbar4-top">
+                        <img
+                          alt="여행지 추천 플랫폼 로고"
+                          src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
+                          class="navbar4-logo"
+                        />
+                        <div
+                          data-thq="thq-close-menu"
+                          class="navbar4-close-menu"
+                        >
+                          <svg viewBox="0 0 1024 1024" class="navbar4-icon3">
+                            <path
+                              d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                            ></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <nav class="navbar4-links2">
+                        <a href="/">
+                          <fragment class="main-features-fragment1">
+                            <span
+                              class="main-features-text1 thq-link thq-body-small"
+                            >
+                              서울
+                            </span>
+                          </fragment>
+                        </a>
+                        <a href="/">
+                          <fragment class="main-features-fragment2">
+                            <span
+                              class="main-features-text2 thq-link thq-body-small"
+                            >
+                              전북/전남
+                            </span>
+                          </fragment>
+                        </a>
+                        <a href="/">
+                          <fragment class="main-features-fragment3">
+                            <span
+                              class="main-features-text3 thq-link thq-body-small"
+                            >
+                              울산
+                            </span>
+                          </fragment>
+                        </a>
+                        <a href="/">
+                          <fragment class="main-features-fragment4">
+                            <span
+                              class="main-features-text4 thq-link thq-body-small"
+                            >
+                              대구
+                            </span>
+                          </fragment>
+                        </a>
+                        <a href="/">
+                          <fragment class="main-features-fragment5">
+                            <span
+                              class="main-features-text5 thq-link thq-body-small"
+                            >
+                              제주
+                            </span>
+                          </fragment>
+                        </a>
+                      </nav>
+                    </div>
+                    <div class="navbar4-buttons">
+                      <button>Login</button>
+                      <button>Register</button>
+                    </div>
+                  </div>
+                </header>
+              </header>
+            </navbar4-wrapper>
+            <h2 class="main-features-text6 thq-heading-2">
+              <span>추천 여행지</span>
+            </h2>
+            <div class="main-features-max-width thq-section-max-width">
+              <div class="main-features-content1">
+                <div class="main-features-row thq-flex-row">
+                  <div class="main-features-feature1 thq-flex-column">
+                    <a href="index.html">
+                      <img
+                        alt="AI로 추천받는 국내 여행지 이미지"
+                        src="/static/img/ntower-1400w.webp"
+                        class="main-features-feature2-image1 thq-img-ratio-4-3"
+                      />
+                    </a>
+                    <div class="main-features-content2 thq-flex-column">
+                      <h3>
+                        <fragment class="home-fragment1">
+                          <span class="home-feature1-title thq-heading-3">
+                            N서울타워
+                          </span>
+                        </fragment>
+                      </h3>
+                      <span class="thq-body-small"><span></span></span>
+                    </div>
+                  </div>
+                  <div class="main-features-feature2 thq-flex-column">
+                    <a href="index.html">
+                      <img
+                        alt="AI로 추천받는 국내 여행지 이미지"
+                        src="/static/img/gyongbokgung-300h.webp"
+                        class="main-features-feature2-image2 thq-img-ratio-4-3"
+                      />
+                    </a>
+                    <div class="main-features-content3 thq-flex-column">
+                      <h3 class="thq-heading-3"><span>경복궁</span></h3>
+                      <span class="thq-body-small"><span></span></span>
+                    </div>
+                  </div>
+                  <div class="main-features-feature3 thq-flex-column">
+                    <a href="index.html">
+                      <img
+                        alt="인기 국내 여행지 이미지"
+                        src="/static/img/myongdong-300h.webp"
+                        class="main-features-feature3-image thq-img-ratio-4-3"
+                      />
+                    </a>
+                    <div class="main-features-content4 thq-flex-column">
+                      <h3 class="thq-heading-3"><span>명동</span></h3>
+                      <span class="thq-body-small"><span></span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="main-features-actions">
+                <a
+                  href="recommand-page.html"
+                  class="main-features-button thq-button-filled"
+                >
+                  <span class="thq-body-small"><span>더 알아보기</span></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </main-features-wrapper>
+        <under-contact-wrapper class="under-contact-wrapper">
+          <!--UnderContact component-->
+          <div class="under-contact-contact20 thq-section-padding">
+            <div class="under-contact-max-width thq-section-max-width">
+              <div class="under-contact-section-title">
+                <span class="thq-body-small">
+                  <span>고객센터 운영 시간: 월-금 09:00 - 18:00</span>
+                </span>
+                <div class="under-contact-content1">
+                  <h2 class="thq-heading-2"><span>문의하기</span></h2>
+                  <p class="under-contact-text12 thq-body-large">
+                    <span>
+                      문의나 도움이 필요하신 경우 아래 연락처로 언제든지 연락
+                      주세요.
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div class="under-contact-row">
+                <div class="under-contact-content2">
+                  <svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+                    <path
+                      d="M854 342v-86l-342 214-342-214v86l342 212zM854 170q34 0 59 26t25 60v512q0 34-25 60t-59 26h-684q-34 0-59-26t-25-60v-512q0-34 25-60t59-26h684z"
+                    ></path>
+                  </svg>
+                  <div class="under-contact-contact-info1">
+                    <div class="under-contact-content3">
+                      <h3 class="under-contact-text13 thq-heading-3">Email</h3>
+                      <p class="under-contact-text14 thq-body-large">
+                        <span>
+                          이메일로 문의 시 1-2 영업일 이내에 회신해 드립니다.
+                        </span>
+                      </p>
+                    </div>
+                    <span class="under-contact-email thq-body-small">
+                      <span>contact@travelkorea.com</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="under-contact-content4">
+                  <svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+                    <path
+                      d="M282 460q96 186 282 282l94-94q20-20 44-10 72 24 152 24 18 0 30 12t12 30v150q0 18-12 30t-30 12q-300 0-513-213t-213-513q0-18 12-30t30-12h150q18 0 30 12t12 30q0 80 24 152 8 26-10 44z"
+                    ></path>
+                  </svg>
+                  <div class="under-contact-contact-info2">
+                    <div class="under-contact-content5">
+                      <h3 class="under-contact-text15 thq-heading-3">Phone</h3>
+                      <p class="under-contact-text16 thq-body-large">
+                        <span>고객 만족을 위해 최선을 다하겠습니다.</span>
+                      </p>
+                    </div>
+                    <span>
+                      <fragment class="home-fragment2">
+                        <span class="home-phone thq-body-small">
+                          +82-010-5755-2349
+                        </span>
+                      </fragment>
+                    </span>
+                  </div>
+                </div>
+                <div class="under-contact-content6">
+                  <svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+                    <path
+                      d="M512 0c-176.732 0-320 143.268-320 320 0 320 320 704 320 704s320-384 320-704c0-176.732-143.27-320-320-320zM512 512c-106.040 0-192-85.96-192-192s85.96-192 192-192 192 85.96 192 192-85.96 192-192 192z"
+                    ></path>
+                  </svg>
+                  <div class="under-contact-contact-info3">
+                    <div class="under-contact-content7">
+                      <h3 class="under-contact-text17 thq-heading-3">Office</h3>
+                      <p class="under-contact-text18 thq-body-large">
+                        <span>여행에 관한 모든 궁금증을 해결해 드립니다.</span>
+                      </p>
+                    </div>
+                    <span class="under-contact-address thq-body-small">
+                      <span>서울특별시 강남구 역삼동 123-45</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </under-contact-wrapper>
+        <under-footer-wrapper class="under-footer-wrapper">
+          <!--UnderFooter component-->
+          <footer class="under-footer-footer1 thq-section-padding">
+            <div class="under-footer-max-width thq-section-max-width">
+              <div class="under-footer-content">
+                <div class="under-footer-newsletter">
+                  <img
+                    alt="image"
+                    src="/static/img/logo200h.png"
+                    class="under-footer-image"
+                  />
+                  
+                  <div class="newsletter-subscribe">
+                    <div class="container">
+                        <div class="intro">
+                            <span class="thq-body-small">
+                                뉴스레터를 구독하면 우리의 최신 정보를 확인할 수 있습니다.
+                            </span>
+                        </div>
+                        
+                        <form class="form-inline under-footer-form" method="post">
+                            <div class="form-group under-footer-container">
+                                <input type="email" name="email" placeholder="이메일주소 입력" class="form-control under-footer-text-input thq-input" />
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary thq-button-outline under-footer-button" type="submit">
+                                    <span class="under-footer-text-input">구독</span>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <span class="under-footer-content2 thq-body-small text-center">
+                            뉴스레터 구독은 우리의 개인정보 보호 조항과 우리의 소식을 받는 것에 대한 동의를 포함합니다.
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- 필요한 JS 스크립트 -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+                
+                </div>
+                <div class="under-footer-links">
+                  <div class="under-footer-column1">
+                    <strong class="thq-body-large under-footer-column1-title">
+                      <span>인기 여행지</span>
+                    </strong>
+                    <div class="under-footer-footer-links1">
+                      <span class="thq-body-small"><span>제주도</span></span>
+                      <span class="thq-body-small"><span>부산</span></span>
+                      <span class="thq-body-small"><span>강릉</span></span>
+                      <span class="thq-body-small"><span>경주</span></span>
+                      <span class="thq-body-small">
+                        <span>롯데호텔 서울</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="under-footer-column2">
+                    <strong class="thq-body-large under-footer-column2-title">
+                      <span>인기 호텔</span>
+                    </strong>
+                    <div class="under-footer-footer-links2">
+                      <span class="thq-body-small">
+                        <span>그랜드 하얏트 서울</span>
+                      </span>
+                      <span class="thq-body-small">
+                        <span>신라호텔 제주</span>
+                      </span>
+                      <span class="thq-body-small">
+                        <span>파라다이스 호텔 부산</span>
+                      </span>
+                      <span class="thq-body-small">
+                        <span>웨스틴 조선 호텔 부산</span>
+                      </span>
+                      <span class="thq-body-small">
+                        <span>호텔 앤 리조트 예약</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="under-footer-column3">
+                    <strong
+                      class="thq-body-large under-footer-social-link1-title"
+                    >
+                      <span>팔로우</span>
+                    </strong>
+                    <div class="under-footer-social-links">
+                      <div class="under-footer-link14">
+                        <svg
+                          viewBox="0 0 877.7142857142857 1024"
+                          class="thq-icon-small"
+                        >
+                          <path
+                            d="M713.143 73.143c90.857 0 164.571 73.714 164.571 164.571v548.571c0 90.857-73.714 164.571-164.571 164.571h-107.429v-340h113.714l17.143-132.571h-130.857v-84.571c0-38.286 10.286-64 65.714-64l69.714-0.571v-118.286c-12-1.714-53.714-5.143-101.714-5.143-101.143 0-170.857 61.714-170.857 174.857v97.714h-114.286v132.571h114.286v340h-304c-90.857 0-164.571-73.714-164.571-164.571v-548.571c0-90.857 73.714-164.571 164.571-164.571h548.571z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">Facebook</span>
+                      </div>
+                      <div class="under-footer-link15">
+                        <svg
+                          viewBox="0 0 877.7142857142857 1024"
+                          class="thq-icon-small"
+                        >
+                          <path
+                            d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">Instagram</span>
+                      </div>
+                      <div class="under-footer-link16">
+                        <svg
+                          viewBox="0 0 950.8571428571428 1024"
+                          class="thq-icon-small"
+                        >
+                          <path
+                            d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">X</span>
+                      </div>
+                      <div class="under-footer-link17">
+                        <svg
+                          viewBox="0 0 877.7142857142857 1024"
+                          class="thq-icon-small"
+                        >
+                          <path
+                            d="M135.429 808h132v-396.571h-132v396.571zM276 289.143c-0.571-38.857-28.571-68.571-73.714-68.571s-74.857 29.714-74.857 68.571c0 37.714 28.571 68.571 73.143 68.571h0.571c46.286 0 74.857-30.857 74.857-68.571zM610.286 808h132v-227.429c0-121.714-65.143-178.286-152-178.286-70.857 0-102.286 39.429-119.429 66.857h1.143v-57.714h-132s1.714 37.143 0 396.571v0h132v-221.714c0-11.429 0.571-23.429 4-32 9.714-23.429 31.429-48 68-48 47.429 0 66.286 36 66.286 89.714v212zM877.714 237.714v548.571c0 90.857-73.714 164.571-164.571 164.571h-548.571c-90.857 0-164.571-73.714-164.571-164.571v-548.571c0-90.857 73.714-164.571 164.571-164.571h548.571c90.857 0 164.571 73.714 164.571 164.571z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">LinkedIn</span>
+                      </div>
+                      <div class="under-footer-link18">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M406.286 644.571l276.571-142.857-276.571-144.571v287.429zM512 152c215.429 0 358.286 10.286 358.286 10.286 20 2.286 64 2.286 102.857 43.429 0 0 31.429 30.857 40.571 101.714 10.857 82.857 10.286 165.714 10.286 165.714v77.714s0.571 82.857-10.286 165.714c-9.143 70.286-40.571 101.714-40.571 101.714-38.857 40.571-82.857 40.571-102.857 42.857 0 0-142.857 10.857-358.286 10.857v0c-266.286-2.286-348-10.286-348-10.286-22.857-4-74.286-2.857-113.143-43.429 0 0-31.429-31.429-40.571-101.714-10.857-82.857-10.286-165.714-10.286-165.714v-77.714s-0.571-82.857 10.286-165.714c9.143-70.857 40.571-101.714 40.571-101.714 38.857-41.143 82.857-41.143 102.857-43.429 0 0 142.857-10.286 358.286-10.286v0z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">Youtube</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="under-footer-credits">
+                <div class="thq-divider-horizontal"></div>
+                <div class="under-footer-row">
+                  <span class="thq-body-small">
+                    <span>© 2024 Traveler</span>
+                  </span>
+                  <div class="under-footer-footer-links3">
+                    <span class="thq-body-small">
+                      <span>개인정보 조항</span>
+                    </span>
+                    <span class="thq-body-small"><span>이용약관</span></span>
+                    <span class="thq-body-small"><span>쿠키 설정</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </under-footer-wrapper>
+      </div>
+    </div>
+    <script
+      defer=""
+      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+    ></script>
+  </body>
+</html>

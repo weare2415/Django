@@ -1,0 +1,105 @@
+/* 전체 페이지 레이아웃 */
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 컨테이너*/
+.container {
+    background-color: #fff;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+/* / 헤더 섹션 */
+.header h1 {
+    font-size: 24px;
+    color: #6c63ff;
+    margin-bottom: 20px;
+}
+
+.main-page-link button {
+    background-color: #6c63ff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.main-page-link button:hover {
+    background-color: #4b41ff;
+}
+
+/* / 사용자 정보 섹션 / */
+.profile-section {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.profile-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.profile-section p {
+    font-size: 14px;
+    color: #333;
+}
+
+/* / 액션 버튼 스타일 / */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-button {
+    margin-bottom: 10px;
+}
+
+.profile-button button {
+    background-color: #6c63ff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-button button:hover {
+    background-color: #4b41ff;
+}
+
+/* / 사용자 환영 메시지 / */
+.greeting-section {
+    margin-top: 20px;
+}
+
+.greeting-section p {
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* / 반응형 처리 */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}

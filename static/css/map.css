@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400;700&family=Jua&display=swap');
+
+body {
+    background-color: #FBF1EB !important; /* 인덱스페이지 바디부분 살구색 채용 */
+    font-family: 'Baloo 2', sans-serif; /* 텍스트 폰트 */
+    color: #333; /* 기본 텍스트 색상 */
+}
+
+/* 제목 스타일 */
+#h1_t {
+    font-family: 'Pacifico', cursive; /* 타이틀 폰트 */
+    color: #FF6F61; /* 글자 색상: 밝은 코랄 */
+    font-size: 2.3rem;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+}
+
+/* h2 스타일 */
+h2 {
+    font-family: 'Pacifico', cursive; /* 자유로운 느낌의 폰트 적용 */
+    color: #FF6F61; /* 밝은 코랄 색상 */
+    font-size: 2rem; /* 적당한 크기로 설정 */
+    margin: 0; /* h1과 가까이 붙이기 위해 여백 제거 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 추가 */
+    transition: color 0.3s ease-in-out; /* transform 제거, 컬러만 애니메이션 적용 */
+}
+
+h2:hover {
+    color: #FF4500; /* 호버 시 더 밝은 오렌지색으로 변경 */
+}
+
+/* h1과 h2를 가로로 배치 */
+.header {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    gap: 10px; /* h2와 h1 사이 간격을 좁게 설정 */
+    margin-bottom: 20px;
+    justify-content: center; /* 중앙 정렬 */
+}
+
+/* h1 스타일 */
+/* 제목 스타일 */
+h1 {
+    font-family: 'Jua', sans-serif; /* Jua 폰트 사용 */
+    color: #FF6F61; /* 글자 색상: 밝은 코랄 */
+    font-size: 2.5rem; /* 글자 크기 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    position: absolute; /* 절대 위치 사용 */
+    top: 10px; /* 화면의 상단에서 10px 떨어지도록 설정 */
+    left: 50%; /* 가로 중앙 정렬 */
+    transform: translateX(-50%); /* 정확히 가로 중앙에 배치되도록 이동 */
+    margin: 0; /* 불필요한 여백 제거 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+h2 a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: #ff5722; /* 텍스트 색상 */
+    font-size: 2rem; /* 텍스트 크기 */
+    font-weight: 700; /* 텍스트 굵기 */
+    display: flex; /* 아이콘과 텍스트를 가로로 정렬 */
+    align-items: center; /* 아이콘과 텍스트 수직 중앙 정렬 */
+}
+
+h2 a i {
+    margin-right: 10px; /* 아이콘과 텍스트 사이 간격 */
+    font-size: 2.2rem; /* 아이콘 크기 */
+    color: #ff5722; /* 아이콘 색상 */
+}
+
+h2 a:hover {
+    text-decoration: none; /* 마우스 오버 시 밑줄 제거 */
+    color: #e64a19; /* 호버 시 더 진한 색상으로 변경 */
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEARCH</title>
+</head>
+<body>
+    <h2><a href="{% url 'index' %}">메인</a></h2>
+
+    <h1>검색 결과 받아오기</h1>
+    <h2>명소</h2>
+
+    {% if user.is_authenticated %}
+
+        {% if error_msg %}
+        <div>
+            {{ error_msg }}
+        </div>
+        {% endif %}
+        
+        {% if lat and lng %}
+            <h2>현재 위도 : {{ lat }}</h2>
+            <h2>현재 경도 : {{ lng }}</h2>
+        {% else %}
+            <h2>현재 위도 : </h2>
+            <h2>현재 경도 : </h2>
+        {% endif %}
+
+        {% if context %}
+            {{ context.map | safe }}
+        {% endif %}
+
+        <form action="{% url 'LocationUrl' %}" method="post">
+            {% csrf_token %}
+            <div><button type="submit" name="location" value="get">현재 위치 찾기</button></div>
+            <div><button type="submit" name="location" value="save">위치 저장</button></div>
+            <div><button type="submit" name="location" value="visualization">시각화</button></div>
+        </form>
+    {% else %}
+        <h1>로그인 먼저 진행하세요.</h1>
+    {% endif %}
+</body>
+</html>
